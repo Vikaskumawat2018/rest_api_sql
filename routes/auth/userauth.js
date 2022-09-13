@@ -1,5 +1,9 @@
 const router =require('express').Router();
 const User=require('../../model/userDB')
+const validation=require('../validation');
+//const {val_user}=require('../validation');
+
+/*
 const Joi =require('@hapi/joi');
 
 //joi validation schema
@@ -8,11 +12,11 @@ const val_user = Joi.object({
     password: Joi.string().min(5).required()
 });
 
-
+*/
 
 router.post('/register',async(req,res)=>{
     //validate using joi(schema)
-    const {error} = val_user.validate(req.body);
+    const {error} = validation.val_user.validate(req.body);
     //res.send(error.details);
     //res.send(error.details[0].message);
     if(error) return res.status(400).send(error.details[0].message);

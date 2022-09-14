@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 //const pool = require('mysql');
+//const mysql = require('mysql');
 app.use(express.json());
 const dotenv=require('dotenv');
 dotenv.config();
@@ -29,7 +30,8 @@ const userRoter=require("./routes/user.router");
 
 
 //routes 
-app.use("/api/users",userRoter);
+//app.use("/api/users",userRoter);
+app.use("/reg",userRoter);
 //remote address
 //app.use('/api/user',authRoute);
 
@@ -39,10 +41,11 @@ app.use("/api/users",userRoter);
 
 
 //local
+/*
 app.get('/',(req,res)=>{
     res.send('we are on /');
-})
-
+});
+*/
     
 
 

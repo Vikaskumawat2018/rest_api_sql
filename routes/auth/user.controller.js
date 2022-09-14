@@ -1,4 +1,5 @@
 const test=require("./reg");
+//const {reg}=require("./reg");
 
 module.exports={
     createUser:(req,res)=>{
@@ -10,6 +11,7 @@ module.exports={
             }
             return res.status(200).send("ok");
         });
+        
     }
 }
 

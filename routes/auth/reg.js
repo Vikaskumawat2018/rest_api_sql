@@ -4,7 +4,8 @@ const pool = require("../../database");
 
 module.exports = {
     reg: (data, callBack) => {
-        `insert into reg (id,name,password) values(?,?,?)`,
+        pool.query(
+            `insert into reg (id,name,password) values(?,?,?)`,
             [
                 data.id,
                 data.name,
@@ -17,9 +18,8 @@ module.exports = {
                 }
                 return callBack(null,results);
             }
-
+        );
     }
-
 };
 
 

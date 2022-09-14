@@ -6,7 +6,7 @@
     "epxress": "^0.0.1-security",
     "express": "^4.17.3",
     "joi": "^17.6.0",
-    "mongoose": "^6.2.9"
+    "mysql": "^2.18.1"
   },
   "name": "node",
   "version": "1.0.0",

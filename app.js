@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const mongoose = require('mongoose');
+//const pool = require('mysql');
 app.use(express.json());
 const dotenv=require('dotenv');
 dotenv.config();
@@ -8,24 +8,30 @@ const cors=require('cors');
 app.use(cors());
 
 //DBconnect
-mongoose.connect(process.env.DB_CONNECTION_LOCAL,()=>
-console.log("connected to DB")
-);
+
 
 //DBconnect test
-
+/*
+const pool = mysql.createPool({
+    user: process.env.DB_USER,
+    password: process.env.DB_PASS,
+    database: process.env.DB_NAME,
+    socketpath: `${process.env.INSTANCE_CONNECTION_NAME}`,
+});
+*/
 
 //auth
-const authRoute =require('./routes/auth/userauth');
+//const authRoute =require('./routes/auth/userauth');
 
 //names
 //const posts =('./');
+const userRoter=require("./routes/user.router");
 
 
 //routes 
-
+app.use("/api/users",userRoter);
 //remote address
-app.use('/api/user',authRoute);
+//app.use('/api/user',authRoute);
 
 //test
 //app.use('/posts','./');

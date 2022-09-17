@@ -25,10 +25,14 @@ router.post('/register',async(req,res)=>{
     try{
         pool.query("INSERT INTO nameinfo set ?" ,name_data,(error, results, fields)=>
         {
-            res.send(results);//insertId
-        });
-            
-            
+             //var res1 = JSON.parse(new Object(results));
+             var res1 = results.insertId;
+            //console.log(" this is my json " + (JSON.stringify(results)).insertId);
+            console.log(res1);
+            console.log(results.insertId);
+            res.send(results);
+        }); 
+        
         }catch(err)
         {
             res.status(400).send( err );

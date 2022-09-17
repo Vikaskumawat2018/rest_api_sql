@@ -9,7 +9,7 @@
             "port": 3306,
             "driver": "MariaDB",
             "name": "test",
-            "database": "test",
+            "database": "auth",
             "username": "root",
             "password": "vikas"
         }

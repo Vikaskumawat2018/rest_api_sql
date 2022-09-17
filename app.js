@@ -1,43 +1,32 @@
 const express = require('express');
+var compression = require('compression');
 const app = express();
-//const pool = require('mysql');
-//const mysql = require('mysql');
-app.use(express.json());
 const dotenv=require('dotenv');
 dotenv.config();
 const cors=require('cors');
+
+//use
+app.use(express.json());
 app.use(cors());
-
-//DBconnect
-
-
-//DBconnect test
-/*
-const pool = mysql.createPool({
-    user: process.env.DB_USER,
-    password: process.env.DB_PASS,
-    database: process.env.DB_NAME,
-    socketpath: `${process.env.INSTANCE_CONNECTION_NAME}`,
-});
-*/
-
-//auth
-//const authRoute =require('./routes/auth/userauth');
+app.use(compression());
 
 //names
-//const posts =('./');
+//routes
 const userRoter=require("./routes/user.router");
+//auth
+const authRoute =require('./routes/auth/userauth');
+//const authRoute =require('./routes/auth/auth');
+//app.use("/test","./routes/user.router");
 
 
 //routes 
 //app.use("/api/users",userRoter);
 app.use("/reg",userRoter);
+//app.use("/insert",authRoute);
 //remote address
-//app.use('/api/user',authRoute);
+app.use('/user/',authRoute);
 
 //test
-//app.use('/posts','./');
-//app.use('posts','./routes/posts')
 
 
 //local

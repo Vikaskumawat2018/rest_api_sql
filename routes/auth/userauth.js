@@ -1,6 +1,6 @@
 const router =require('express').Router();
-const User=require('../../model/userDB')
-const validation=require('../validation');
+const pool = require("../../database");
+//const validation=require('../validation');
 //const {val_user}=require('../validation');
 
 /*
@@ -15,28 +15,26 @@ const val_user = Joi.object({
 */
 
 router.post('/register',async(req,res)=>{
-    //validate using joi(schema)
-    const {error} = validation.val_user.validate(req.body);
-    //res.send(error.details);
-    //res.send(error.details[0].message);
-    if(error) return res.status(400).send(error.details[0].message);
+    
+    const name_data={
+        f_name:    req.body.f_name,
+        mid_name:  req.body.mid_name,
+        last_name: req.body.last_name
+    };
     
     try{
-    const new_user=new User(
+        pool.query("INSERT INTO nameinfo set ?" ,name_data,(error, results, fields)=>
         {
-            username:req.body.username,
-            password:req.body.password
+            res.send(results);//insertId
         });
-    
-        
+            
+            
+        }catch(err)
+        {
+            res.status(400).send( err );
+        }
         //console.log('before save');
-        let saveUser = await new_user.save();
-        res.send(saveUser);
-        
-    }catch(err)
-    {
-        res.status(400).send( err );
-    }
+ 
 });
 
 router.get('/',async(req,res)=>{
@@ -50,20 +48,5 @@ catch(err)
 }
 });
 
-
-const schema={
-    username:{
-        type:String,
-        required:true,
-        min:2,
-        max:200
-    },
-        password:{
-            type:String,
-            required:true,
-            min:2,
-            max:128
-        }
-}
 
 module.exports=router;

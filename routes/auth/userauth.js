@@ -13,6 +13,7 @@ const val_user = Joi.object({
 });
 
 */
+let name_id1, address_id1, contact_id1;
 
 router.post('/register',async(req,res)=>{
     
@@ -21,17 +22,61 @@ router.post('/register',async(req,res)=>{
         mid_name:  req.body.mid_name,
         last_name: req.body.last_name
     };
+    const address_data={
+        ad1:      req.body.ad1,
+        ad2:      req.body.ad2,
+        loc_id:   req.body.loc_id
+    };
+    const contact_data={
+        code:     req.body.code,
+        num:      req.body.num,
+        num_verify:   req.body.num_verify,
+        mail:      req.body.mail,
+        mail_verify:   req.body.mail_verify
+    };
+    
     
     try{
         pool.query("INSERT INTO nameinfo set ?" ,name_data,(error, results, fields)=>
         {
-             //var res1 = JSON.parse(new Object(results));
-             var res1 = results.insertId;
-            //console.log(" this is my json " + (JSON.stringify(results)).insertId);
-            console.log(res1);
-            console.log(results.insertId);
-            res.send(results);
+            global.name_id="1";
+            //name_id1=String(results.insertId);
+            //name_id1= JSON.stringify(results.insertId);
+            //name_id1 = results.insertId;
+            //console.log(name_id1);
+            
+            console.log(name_id1);
+            //res.send(name_id1).status(200);
         }); 
+       
+        pool.query("INSERT INTO address_info set ?" ,address_data,(error, results, fields)=>
+        {
+            //address_id1 = results.insertId;
+            address_id1 =JSON.stringify(results.insertId);
+            console.log(address_id1);
+        
+        });
+        pool.query("INSERT INTO contact_info set ?" ,contact_data,(error, results, fields)=>
+        {
+            //contact_id1 = results.insertId;
+            contact_id1 =1;
+            console.log(contact_id1);
+            
+        });
+
+        const user_data={
+            name_id:      name_id1,
+            address_id:      address_id1,
+            con_info_id:   contact_id1
+        };
+
+        pool.query("INSERT INTO user set ?" ,user_data,(error, results, fields)=>
+        {
+            //var res1 = results.insertId;
+            var res1 = JSON.stringify(user_data);
+            console.log(res1);
+            res.send(results);
+        });
         
         }catch(err)
         {
@@ -40,17 +85,5 @@ router.post('/register',async(req,res)=>{
         //console.log('before save');
  
 });
-
-router.get('/',async(req,res)=>{
-try{
-    const Users = await User.find();
-    res.send(Users);
-}
-catch(err)
-{
-    res.send(err)
-}
-});
-
 
 module.exports=router;

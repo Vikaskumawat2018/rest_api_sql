@@ -42,37 +42,39 @@ router.post('/register', async (req, res) => {
 
         var results = await pool.query("INSERT INTO nameinfo set ?", name_data, (error, results, fields) => {
             if (error) throw err;
-            //global.name_id1="1";
-            //process.env.name_id=JSON.stringify(results.insertId);
-            //name_id1=String(results.insertId);
             name_id1 = JSON.stringify(results.insertId);
-            //name_id1 = results.insertId;
-            //console.log(name_id1);
-            //process.env.name_id=1;
-            console.log(name_id1);
-            //res.send(name_id1).status(200);
+            
             pool.query("INSERT INTO address_info set ?", address_data, (error, results, fields) => {
-                //address_id1 = results.insertId;
+                if (error) throw err;
                 address_id1 = JSON.stringify(results.insertId);
-                console.log(address_id1);
 
                 pool.query("INSERT INTO contact_info set ?", contact_data, (error, results, fields) => {
-                    //contact_id1 = results.insertId;
-
+                    if (error) throw err;
                     contact_id1 = JSON.stringify(results.insertId);
-                    console.log(contact_id1);
-
 
                     const user_data = {
                         name_id: name_id1,
-                        address_id: "1",
-                        con_info_id: global.name_id1
+                        address_id: address_id1,
+                        con_info_id: contact_id1
                     };
+
                     pool.query("INSERT INTO user set ?", user_data, (error, results, fields) => {
-                        //var res1 = results.insertId;
-                        var res1 = JSON.stringify(user_data);
-                        console.log(res1);
-                        res.send("Success");
+                        if (error) throw err;
+                        var user_id = JSON.stringify(results.insertId);
+                        
+                        const passwd={
+                            cust_id     : user_id,
+                            password    :req.body.password
+                        }
+
+                        pool.query("INSERT INTO login_info set ?", passwd, (error, results, fields) => {
+                            if (error) throw err;
+
+                            res.send("user created successfully");
+                        });
+
+                        //console.log(res1);
+                        
                     });
 
                 });
@@ -84,5 +86,10 @@ router.post('/register', async (req, res) => {
     //console.log('before save');
 
 });
+
+router.post('/login', async (req, res) => {
+
+});
+
 
 module.exports = router;

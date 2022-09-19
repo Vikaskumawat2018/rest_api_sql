@@ -1,4 +1,3 @@
-
 const pool = require("../../database");
 
 
@@ -11,7 +10,6 @@ module.exports = {
                 data.f_name,
                 data.mid_name,
                 data.last_name
-
             ],
             (error, results, fields) => {
                 if (error) {

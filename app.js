@@ -12,22 +12,24 @@ app.use(compression());
 
 //names
 //routes
-const userRoter=require("./routes/user.router");
+const userRoter=require("./routes/auth/user.router");
+const product=require("./routes/ product/pro_mid");
 //auth
 const authRoute =require('./routes/auth/userauth');
+
 //const authRoute =require('./routes/auth/auth');
 //app.use("/test","./routes/user.router");
 
 
 //routes 
+//remote address
 //app.use("/api/users",userRoter);
 app.use("/reg",userRoter);
-//app.use("/insert",authRoute);
-//remote address
 app.use('/user/',authRoute);
+app.use('/product',product);
+
 
 //test
-
 
 //local
 /*

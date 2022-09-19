@@ -1,5 +1,5 @@
 const Joi =require('@hapi/joi');
-const router = require('./auth/userauth');
+const router = require('../auth/userauth');
 
 
 const val_user = Joi.object({

@@ -47,11 +47,32 @@ module.exports = {
 
     //sub query all details
     details: (data, callBack) => {
-       pool.query("", limit_data, (error, results, fields) => {
+       pool.query("", data, (error, results, fields) => {
             if (error) {return callBack(error);}
             return callBack(null, results);
         });       
-    }
+    },
+
+    cart: (data, callBack) => {
+        pool.query("SELECT * FROM  product.cart WHERE ?;", data, (error, results, fields) => {
+             if (error) {return callBack(error);}
+             return callBack(null, results);
+         });       
+     },
+
+     cartadd: (data, callBack) => {
+        pool.query("INSERT INTO product.cart set ?", data, (error, results, fields) => {
+             if (error) {return callBack(error);}
+             return callBack(null, results);
+         });       
+     },
+
+     wishlist: (data, callBack) => {
+        pool.query("SELECT * FROM  product.wishlist WHERE ?;", data, (error, results, fields) => {
+             if (error) {return callBack(error);}
+             return callBack(null, results);
+         });       
+     }
 
 
 };

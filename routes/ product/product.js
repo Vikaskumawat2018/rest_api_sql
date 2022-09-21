@@ -25,9 +25,19 @@ module.exports={
             }
             return res.status(200).send(results);
         });   
+    },
+
+    update1:(req,res)=>{
+        const body=req.body;
+        //test.reg(body,(err,results)=>{
+            test.update1(body,(err,results)=>{
+            if(err){
+                console.log(db_e);
+                return res.status(500).send(err);
+            }
+            return res.status(200).send(results);
+        });   
     }
-
-
 
 
 

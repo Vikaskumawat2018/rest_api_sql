@@ -1,4 +1,5 @@
 const pool = require("../../database");
+const { update } = require("./product");
 
 
 module.exports = {
@@ -16,7 +17,18 @@ module.exports = {
             if (error) {return callBack(error);}
             return callBack(null, results);
         });       
+    },
+
+    update1: (data, callBack) => {
+        var name_id, address_id, contact_id;
+        var id=data.id;
+        pool.query("update product set ? where id="+id, data, (error, results, fields) => {
+            if (error) {return callBack(error);}
+            return callBack(null, results);
+        });       
     }
+
+
 };
 
 

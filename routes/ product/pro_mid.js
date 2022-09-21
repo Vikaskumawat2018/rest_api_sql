@@ -1,10 +1,12 @@
 const router = require('express').Router();
-const {create,delete1}=require("./product");
+const {create,delete1,update1}=require("./product");
 
 
 
-router.post("/add",create);
-router.delete("/del",delete1);
+router.post("/",create);
+router.delete("/",delete1);
+router.put("/",update1);
+
 
 
 

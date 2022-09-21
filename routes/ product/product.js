@@ -3,6 +3,11 @@ var db_e ="db error";
 //const {reg}=require("./reg");
 
 module.exports={
+
+    er:(req,res)=>{
+            res.send(404); 
+    },
+
     create:(req,res)=>{
         const body=req.body;
         //test.reg(body,(err,results)=>{
@@ -37,10 +42,31 @@ module.exports={
             }
             return res.status(200).send(results);
         });   
+    },
+
+    get_items:(req,res)=>{
+        const body=req.body;
+        //test.reg(body,(err,results)=>{
+            test.get_items(body,(err,results)=>{
+            if(err){
+                console.log(db_e);
+                return res.status(500).send(err);
+            }
+            return res.status(200).send(results);
+        });   
+    },
+
+    details:(req,res)=>{
+        const body=req.body;
+        //test.reg(body,(err,results)=>{
+            test.details(body,(err,results)=>{
+            if(err){
+                console.log(db_e);
+                return res.status(500).send(err);
+            }
+            return res.status(200).send(results);
+        });   
     }
-
-
-
 
     
 }

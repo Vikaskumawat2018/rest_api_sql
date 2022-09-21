@@ -1,1 +1,1 @@
-INSERT INTO nameinfo (f_name,mid_name,last_name) VALUES ("v","v","v");
+SELECT * FROM product.product LIMIT 5 OFFSET 2;
